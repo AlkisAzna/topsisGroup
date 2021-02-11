@@ -45,7 +45,7 @@ class TopsisGroup:
     # Arxikopoihsh twn dataframes
     @staticmethod
     def _init_candidates_df(data):
-        df_candidates = pd.read_excel(data).iloc[:-1]
+        df_candidates = pd.read_excel(data).iloc[:]
         df_persons = df_candidates.astype('int').set_index('No')
         return df_persons
 
@@ -242,7 +242,7 @@ class TopsisGroup:
         plots = data.plot(kind='bar', figsize=(14, 9), color='red', xlabel='Candidates', ylabel='Ranking Score',
                           title="Evaluation using Euclidean-Geometric technique")
         for index, bar in enumerate(plots.patches):
-            plots.annotate(ranks_eucl_arithmetic[index],
+            plots.annotate(ranks_eucl_geometric[index],
                            (bar.get_x() + bar.get_width() / 2,
                             bar.get_height()), ha='center', va='center',
                            size=11, xytext=(0, 8),
@@ -251,11 +251,11 @@ class TopsisGroup:
         plt.savefig("Evaluation-Euclidean-Geometric.svg")
         plt.show()
 
-        data = pd.DataFrame(self.rel_close_eucl_arithmetic, index=x_axis)
+        data = pd.DataFrame(self.rel_close_manh_arithmetic, index=x_axis)
         plots = data.plot(kind='bar', figsize=(14, 9), color='green', xlabel='Candidates', ylabel='Ranking Score',
                           title="Evaluation using Manhattan-Arithmetic technique")
         for index, bar in enumerate(plots.patches):
-            plots.annotate(ranks_eucl_arithmetic[index],
+            plots.annotate(ranks_manh_arithmetic[index],
                            (bar.get_x() + bar.get_width() / 2,
                             bar.get_height()), ha='center', va='center',
                            size=11, xytext=(0, 8),
@@ -264,11 +264,11 @@ class TopsisGroup:
         plt.savefig("Evaluation-Manhattan-Arithmetic.svg")
         plt.show()
 
-        data = pd.DataFrame(self.rel_close_eucl_arithmetic, index=x_axis)
+        data = pd.DataFrame(self.rel_close_manh_geometric, index=x_axis)
         plots = data.plot(kind='bar', figsize=(14, 9), color='olive', xlabel='Candidates', ylabel='Ranking Score',
                           title="Evaluation using Manhattan-Geometric technique")
         for index, bar in enumerate(plots.patches):
-            plots.annotate(ranks_eucl_arithmetic[index],
+            plots.annotate(ranks_manh_geometric[index],
                            (bar.get_x() + bar.get_width() / 2,
                             bar.get_height()), ha='center', va='center',
                            size=11, xytext=(0, 8),
